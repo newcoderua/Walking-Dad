@@ -1,4 +1,4 @@
-atom ## Walking Dad is educational web app for young coders inspired by [CodeMonkey](https://www.playcodemonkey.com/)
+## Walking Dad is educational web app for young coders inspired by [CodeMonkey](https://www.playcodemonkey.com/)
 
 Walking dad is fun a online game that teaches you how to code. Couple first challenges you will get hints but then you will have to think how to solve the problems. It is a one-player game.
 
