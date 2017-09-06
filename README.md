@@ -1,4 +1,4 @@
-## Walking Dad is educational web app for young coders inspired by [CodeMonkey](https://www.playcodemonkey.com/)
+atom ## Walking Dad is educational web app for young coders inspired by [CodeMonkey](https://www.playcodemonkey.com/)
 
 Walking dad is fun a online game that teaches you how to code. Couple first challenges you will get hints but then you will have to think how to solve the problems. It is a one-player game.
 
@@ -20,3 +20,21 @@ With this game User will be able to:
 
 
 ### Wireframes
+
+This app will consist of multiple pages. Since the screen will be divided into two parts, layout on the left side will be changing depending on the current level. And also it will be navlinks to github, Linkedin and modal about the project. On the right side of the screen will be input textarea for code, button to run code and button to reset.
+Architecture and technologies
+
+![wireframe](https://github.com/newcoderua/Walking-Dad/blob/master/images/wireframe.png?raw=true)
+
+### Architecture and Technologies
+
+- JavaScript
+- Fullscreen API
+- HTML
+- CSS
+- HTML AUDIO(maybe)
+- SVG
+
+### Implementation Timeline
+
+I am working on it
