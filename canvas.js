@@ -3,14 +3,96 @@ var c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+
 var level1 = function() {
+  var dadImage = new Image();
+  dadImage.src = ('https://s3.amazonaws.com/sportbnb-dev/spritesheet.png')
+  dadImage.width = 600;
+  dadImage.height = 120;
+  var delta = dadImage.width / 2.6;
+  var startX = 0;
+  var moveX = 258;
+  var moveY = 200;
+  c.drawImage(dadImage,
+    startX, 0, dadImage.width / 2.3, 1300,
+    258, moveY, dadImage.width / 6, 360)
+
+
+  function walkRightLeft() {
+    if (startX <= 1300) {
+      startX += delta;
+      return c.drawImage(dadImage,
+      startX, 0, dadImage.width / 2.3, 1200,
+      moveX, moveY, dadImage.width / 6, 360);
+    }
+      startX = 0;
+    return c.drawImage(dadImage,
+    startX, 0, dadImage.width / 2.3, 1200,
+    moveX, moveY, dadImage.width / 6, 360);
+  }
+
+  function walkUpDown() {
+    // debugger
+    if (startX <= 1300) {
+      startX += delta;
+      return c.drawImage(dadImage,
+      startX, 0, dadImage.width / 2.3, 1200,
+      moveX, moveY, dadImage.width / 6, 360);
+    }
+      startX = 0;
+    return c.drawImage(dadImage,
+    startX, 0, dadImage.width / 2.3, 1200,
+    moveX, moveY, dadImage.width / 6, 360);
+  }
+
+  window.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // debugger
+
+
+      if ($('textarea')[0].value.split(/\n/)[0] === "right 10") {
+        var int = setInterval(one, 200);
+
+        function one() {
+          if (moveX >= 400) {
+            clearInterval(int);
+            if ($('textarea')[0].value.split(/\n/)[1] === "down 20") {
+               var int2 = setInterval(two, 200);
+
+               function two() {
+                 if (moveY >= 500) {
+                   clearInterval(int2);
+                   falsed = false;
+                 } else {
+                   run();
+                   clearPrevDad();
+                   moveY += 30
+                   walkUpDown();
+                 }
+               }
+             }
+          } else {
+            run();
+            clearPrevDad();
+            moveX += 30
+            walkRightLeft();
+          }
+        }
+      }
+
+
+
+  });
+
+
+
   //green rect
   c.fillStyle="green";
   c.fillRect(10, 10, 100, 100);
 
-  //red rect
+  // red rect
   c.fillStyle="red";
-  c.fillRect(200, 300, 100, 100);
+  c.fillRect(200, 400, 100, 100);
 
   //blue lines
   c.beginPath();
@@ -19,13 +101,10 @@ var level1 = function() {
   c.lineTo(800, 300);
   c.lineTo(800, 0);
   c.strokeStyle="blue";
+  c.closePath();
   c.stroke();
 
-  //mario
-  var marioXcoord = 30;
-  var marioYcoord = 280;
-  var img = document.getElementById("image");
-  c.drawImage(img, marioXcoord, marioYcoord, 120, 120);
+
 
   //icecream
   var icecreamXcoord = 990;
@@ -33,38 +112,39 @@ var level1 = function() {
   var img2 = document.getElementById("image2");
   c.drawImage(img2, icecreamXcoord, icecreamYcoord, 100, 100);
 
-  function clearPrevMario() {
-    c.fillStyle="lightyellow";
-    c.fillRect(marioXcoord, marioYcoord, 120, 120);
+  function clearPrevDad() {
+    c.clearRect(moveX, moveY, 120, 155);
   }
 
 
   window.addEventListener('keydown', (e) => {
     run();
-    const change = 20;
+    clearPrevDad();
+    // const change = 20;
     switch (e.which) {
       case 37:
-        clearPrevMario();
-        marioXcoord -= change;
-        c.drawImage(img, marioXcoord, marioYcoord, 120, 120)
+        moveX -= 30;
+        walkRightLeft();
         break;
       case 40:
-        clearPrevMario();
-        marioYcoord += change;
-        c.drawImage(img, marioXcoord, marioYcoord, 120, 120)
+        // moveY += 30;
+        walkUpDown();
         break;
       case 39:
-        clearPrevMario();
-        marioXcoord += change;
-        c.drawImage(img, marioXcoord, marioYcoord, 120, 120)
+        moveX += 30;
+        walkRightLeft();
         break;
       case 38:
-        clearPrevMario();
-        marioYcoord -= change;
-        c.drawImage(img, marioXcoord, marioYcoord, 120, 120)
+        moveY -= 30;
+        walkUpDown();
         break;
+      // case 13:
+      //   // debugger
+      //   break;
       default:
-        c.drawImage(img, 30, 280, 120, 120)
+      c.drawImage(dadImage,
+        startX, 0, dadImage.width / 2.3, 1300,
+        258, moveY, dadImage.width / 6, 360)
     }
   });
 
@@ -76,7 +156,7 @@ var level1 = function() {
   }
 
   function run() {
-    if (getDistance(marioXcoord, marioYcoord, icecreamXcoord, icecreamYcoord) < 65) {
+    if (getDistance(moveX, moveY, icecreamXcoord, icecreamYcoord) < 65) {
       handleModal();
       window.addEventListener('click', () => $("#modal").removeClass("is-active"));
     }
