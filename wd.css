@@ -6,7 +6,7 @@
 body {
   display: flex;
   justify-content: space-between;
-  background-color: lightyellow;
+  /*background-color: lightyellow;*/
   margin: 3px;
   height: 600px;
   width: 1300px;
@@ -14,9 +14,12 @@ body {
 
 canvas {
   display: block;
+  background-image: url('images/back1.png');
   border: 5px solid black;
   height: 600px;
   width: 990px;
+  background-size: cover;
+  opacity: 0.9;
 }
 
 .user-input {
@@ -75,6 +78,11 @@ canvas {
   }
 
   #yeah-image {
+    width: 350px;
+    height: 200px;
+  }
+
+  #lose-image {
     width: 350px;
     height: 200px;
   }

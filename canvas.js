@@ -1,31 +1,23 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
+
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
 var level1 = function() {
-  //green rect
-  c.fillStyle="green";
-  c.fillRect(10, 10, 100, 100);
 
-  // red rect
-  c.fillStyle="red";
-  c.fillRect(200, 400, 100, 100);
 
-  //blue lines
-  c.beginPath();
-  c.moveTo(600, 0);
-  c.lineTo(600, 300);
-  c.lineTo(800, 300);
-  c.lineTo(800, 0);
-  c.strokeStyle="blue";
-  c.closePath();
-  c.stroke();
+  // dyno
+  var angryDino = new Image();
+  angryDino.src = "https://s3.amazonaws.com/sportbnb-dev/t-rex4.png";
+  var dynoX = 1000;
+  var dynoY = 300;
+  c.drawImage(angryDino, dynoX, dynoY, 200, 200)
 
 
 
-  //icecream
+  // icecream
   var icecreamXcoord = 990;
   var icecreamYcoord = 60;
   var img2 = document.getElementById("image2");
@@ -39,8 +31,8 @@ var level1 = function() {
   var delta = dadImage.width / 2.6;
   var startX = 0;
   var startY = 0;
-  var moveX = 258;
-  var moveY = 200;
+  var moveX = 158;
+  var moveY = 100;
   c.drawImage(dadImage,
     startX, startY, dadImage.width / 2.4, 1300,
     moveX, moveY, dadImage.width / 6, 360)
@@ -85,28 +77,66 @@ var level1 = function() {
   }
 
   function reachGoal() {
-    if (getDistance(moveX, moveY, icecreamXcoord, icecreamYcoord) < 65) {
-      handleModal();
+    if (getDistance(moveX, moveY, icecreamXcoord, icecreamYcoord) < 80) {
+      handleWinSituationModal();
       window.addEventListener('click', () => $("#modal").removeClass("is-active"));
     }
   }
 
-  function handleModal(){
+  function handleWinSituationModal(){
+    $(document).ready(function(){
+      return $("#modal").addClass("is-active");
+    });
+  }
+
+  function reachDanger() {
+    if (getDistance(moveX, moveY, dynoX, dynoY) < 80) {
+      // debugger
+      handleLoseSituationModal();
+      window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
+    } else if (getDistance(moveX, moveY, 665, cb()) < 80) {
+      handleLoseSituationModal();
+      window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
+    }
+  }
+
+  function cb() {
+    // debugger
+    if ((moveY > 200) && (moveY < 300)) {
+      return 1000000;
+    } else {
+      return moveY;
+    }
+  }
+
+
+
+  function handleLoseSituationModal() {
       $(document).ready(function(){
-          return $("#modal").addClass("is-active");
+          return $("#modalLose").addClass("is-active");
     });
   }
 
 
+  function runMove(moves) {
+    // debugger
+    if (moves.length < 1) {
+      return;
+    }
+    var move = moves.shift();
+    var dir = move.split(' ')[0];
+    var step = move.split(' ')[1];
+    // debugger
+    useDirAndStep(dir, step);
+
+  }
+
   window.addEventListener('submit', (e) => {
     e.preventDefault();
-    // debugger
-    $('textarea')[0].value.split(/\n/).forEach((move) => {
-      var dir = move.split(' ')[0];
-      var step = move.split(' ')[1];
-      // debugger
-      useDirAndStep(dir, step);
-    });
+      window.moves = $('textarea')[0].value.split(/\n/);
+      runMove(moves);
+
+
 
   });
 
@@ -119,8 +149,11 @@ var level1 = function() {
           // debugger
           if (moveX - parseInt(step) === initX) {
             clearInterval(int1);
+            // debugger
+            runMove(moves);
           } else {
             reachGoal();
+            reachDanger();
             clearPrevDad();
             moveX += parseInt(step) / 10;
             walkRightLeft();
@@ -134,8 +167,10 @@ var level1 = function() {
           // debugger
           if (moveX + parseInt(step) === initX) {
             clearInterval(int3);
+            runMove(moves);
           } else {
             reachGoal();
+            reachDanger();
             clearPrevDad();
             moveX -= parseInt(step) / 10;
             walkRightLeft();
@@ -149,8 +184,10 @@ var level1 = function() {
           // debugger
           if (moveY + parseInt(step) === initY) {
             clearInterval(int4);
+            runMove(moves);
           } else {
             reachGoal();
+            reachDanger();
             clearPrevDad();
             moveY -= parseInt(step) / 10;
             walkUpDown();
@@ -164,8 +201,10 @@ var level1 = function() {
           // debugger
           if (moveY - parseInt(step) === initY) {
             clearInterval(int2);
+            runMove(moves);
           } else {
             reachGoal();
+            reachDanger();
             clearPrevDad();
             moveY += parseInt(step) / 10;
             walkRightLeft();
@@ -178,16 +217,9 @@ var level1 = function() {
 
 }
 
-
-
-
-
-
-
-
-
   window.addEventListener('keydown', (e) => {
     reachGoal();
+    reachDanger();
     clearPrevDad();
     switch (e.which) {
       case 37:
@@ -211,7 +243,11 @@ var level1 = function() {
                           moveX, moveY, dadImage.width / 6, 360)
       }
     });
+
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    level1();
+  });
 // implementation
-level1();
