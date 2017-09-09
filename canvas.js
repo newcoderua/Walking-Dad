@@ -2,26 +2,30 @@ var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1500;
+canvas.height = 800;
 
 var level1 = function() {
+  // debugger
+var pivot = canvas.height;
 
 
   // dyno
-  var angryDino = new Image();
-  angryDino.src = "https://s3.amazonaws.com/sportbnb-dev/t-rex4.png";
-  var dynoX = 1000;
-  var dynoY = 300;
-  c.drawImage(angryDino, dynoX, dynoY, 200, 200)
+  var angryDino = document.getElementById("dyno");
+  var dynoX = (canvas.width / 2) + canvas.height / 2;
+  var dynoY = (canvas.height / 2) - canvas.height / 6;
+  // c.drawImage(angryDino, dynoX, dynoY, 200, 200)
+  c.drawImage(angryDino, dynoX, dynoY, canvas.height / 3, canvas.height / 3)
 
 
 
-  // icecream
-  var icecreamXcoord = 990;
-  var icecreamYcoord = 60;
+
+  // kid
+  var kidX = (canvas.width / 2) + canvas.height / 2;;
+  var kidY = (canvas.height / 2) - canvas.height / 2;
   var img2 = document.getElementById("image2");
-  c.drawImage(img2, icecreamXcoord, icecreamYcoord, 100, 100);
+  // c.drawImage(img2, kidX, kidY, 100, 100);
+  c.drawImage(img2, kidX, kidY, canvas.height / 6, canvas.height / 6);
 
   //dad
   var dadImage = new Image();
@@ -36,6 +40,21 @@ var level1 = function() {
   c.drawImage(dadImage,
     startX, startY, dadImage.width / 2.4, 1300,
     moveX, moveY, dadImage.width / 6, 360)
+
+  // var dadImage = new Image();
+  // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
+  // dadImage.width = canvas.height;
+  // dadImage.height = canvas.height / 5;
+  // // var delta = dadImage.width / 2.6;
+  // var startX = 0;
+  // var startY = 0;
+  // var moveX = canvas.height / 6;
+  // var moveY = canvas.height / 6;
+  // // c.drawImage(dadImage,
+  // //   startX, startY, dadImage.width / 2.4, canvas.height * 2,
+  // //   moveX, moveY, dadImage.width / 6, canvas.height / 2);
+  // c.drawImage(dadImage, startX, startY, dadImage.width / 3.8, dadImage.height * 3,
+  //                       moveX, moveY, canvas.height / 4.5, canvas.height / 3.5)
 
 
   function walkRightLeft() {
@@ -77,7 +96,7 @@ var level1 = function() {
   }
 
   function reachGoal() {
-    if (getDistance(moveX, moveY, icecreamXcoord, icecreamYcoord) < 80) {
+    if (getDistance(moveX, moveY, kidX, kidY) < 100) {
       handleWinSituationModal();
       window.addEventListener('click', () => $("#modal").removeClass("is-active"));
     }
@@ -90,19 +109,24 @@ var level1 = function() {
   }
 
   function reachDanger() {
-    if (getDistance(moveX, moveY, dynoX, dynoY) < 80) {
+    if (getDistance(moveX, moveY, dynoX, dynoY) < 100) {
       // debugger
       handleLoseSituationModal();
-      window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
-    } else if (getDistance(moveX, moveY, 665, cb()) < 80) {
+      // $('modal-close js-hide-modal').onclick($("#modalLose").removeClass("is-active"))
+      // window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
+    } else if (getDistance(moveX, moveY, canvas.width / 2, cb()) < 100) {
       handleLoseSituationModal();
-      window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
+      // debugger
+      // $('modal-close js-hide-modal').onclick($("#modalLose").removeClass("is-active"))
+      // window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
     }
   }
 
+
+
   function cb() {
     // debugger
-    if ((moveY > 200) && (moveY < 300)) {
+    if ((moveY > ((canvas.height / 3) + 40)) && (moveY < ((canvas.height / 3) + 120))) {
       return 1000000;
     } else {
       return moveY;
@@ -121,7 +145,11 @@ var level1 = function() {
   function runMove(moves) {
     // debugger
     if (moves.length < 1) {
-      return;
+      // debugger
+      if ($("#modal")[0].className === "modal is-active") {
+        return;
+      }
+      return handleLoseSituationModal();
     }
     var move = moves.shift();
     var dir = move.split(' ')[0];
@@ -218,6 +246,7 @@ var level1 = function() {
 }
 
   window.addEventListener('keydown', (e) => {
+    console.log(moveX, moveY);
     reachGoal();
     reachDanger();
     clearPrevDad();
@@ -239,15 +268,22 @@ var level1 = function() {
       walkUpDown();
       break;
       default:
-      c.drawImage(dadImage, startX + 49, 0, dadImage.width / 2.89, 1200,
-                          moveX, moveY, dadImage.width / 6, 360)
+      c.drawImage(dadImage,
+        startX, startY, dadImage.width / 2.4, 1300,
+        moveX, moveY, dadImage.width / 6, 360)
       }
     });
 
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    level1();
+// document.addEventListener("DOMContentLoaded", () => {
+//     $('textarea').focus();
+//     level1();
+//   });
+
+  $(window).ready(function() {
+    $('textarea').focus();
+      level1();
   });
 // implementation

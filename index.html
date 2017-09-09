@@ -4,17 +4,30 @@
     <meta charset="utf-8">
     <title>WD</title>
     <link rel="stylesheet" type="text/css" href="wd.css">
+    <script>
+       function refreshPage() {
+        location.reload();
+      }
+
+      function startNextLevel() {
+        alert('Next level not ready yet')
+      }
+    </script>
   </head>
 
     <body>
 
       <section id="modal" class="modal">
         <article class="modal-content">
-          <span class="modal-close js-hide-modal">&times;</span>
-
           <h1>Yeeeaaah, you completed first challenge!</h1>
 
-          <p><img id="yeah-image" src="https://bookcreator.com/wp-content/uploads/2016/10/yeah-600px.png"/></p>
+          <p>
+            <img id="yeah-image" src="https://bookcreator.com/wp-content/uploads/2016/10/yeah-600px.png"/>
+         </p>
+
+         <div id="next-level">
+           <button onclick="startNextLevel()" class='nex-level-class'>Next Level</button>
+         </div>
 
         </article>
         <div class="modal-screen js-hide-modal"></div>
@@ -22,37 +35,47 @@
 
       <section id="modalLose" class="modal">
         <article class="modal-content">
-          <span class="modal-close js-hide-modal">&times;</span>
 
           <h1>Ooooops, you lost!!!</h1>
 
           <p><img id="lose-image" src="images/busted.gif"/></p>
-
+          <div id="wrapped-keep-try-button">
+            <button onclick="refreshPage()" class='keep-try-button'>Keep trying</button>
+          </div>
         </article>
         <div class="modal-screen js-hide-modal"></div>
       </section>
-      
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
       <div id="outer-body">
 
 
         <canvas>
-          <img id="image" type="hidden" src="https://vignette4.wikia.nocookie.net/fantendo/images/8/8d/Mmama.png/revision/latest?cb=20121106203542" />
-          <img id="image2" type="hidden" src="http://www.stickpng.com/assets/thumbs/580b57fcd9996e24bc43c1ba.png" />
+
+          <img id="image2" type="hidden" src="images/navy-baby-sitting-hi.png" />
+          <img id="dyno" type="hidden" src="http://www.clipartlord.com/wp-content/uploads/2013/12/t-rex4.png" />
         </canvas>
         <script type="text/javascript" src='canvas.js'></script>
 
       </div>
 
-      <div id="user-input">
-        <form class="" action="index.html" method="post">
+      <div id="right-user-column">
+        <div class='main-page-user-input-header'>
+          HELP DAD TO FIND KID</br></br>
+          TYPE IN CODE BELOW
+        </div></br>
+        <div id="user-input">
+          <div>
+            <img id="img-nums" src="images/123456789.png" />
+          </div>
+          <form class="" action="index.html" method="post">
 
-          <textarea class="user-input" type="textarea" name="" value=""></textarea>
+            <textarea class="user-input" type="textarea" placeholder="right 200                         down 300" value=""></textarea>
 
-          <button class="user-input-button" type="submit" name="RUN">RUN</button>
-        </form>
-
+            <div id="button-run"><button class="user-input-button" type="submit" name="RUN">RUN</button></div>
+          </form>
+        </div>
       </div>
     </body>
 

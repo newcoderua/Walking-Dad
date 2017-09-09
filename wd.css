@@ -1,35 +1,101 @@
-#outer-body {
-  display: flex;
-  /*justify-content: space-between;*/
+html {
+  /*height: 800px;
+  max-width: 1200px;*/
 }
 
 body {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   /*background-color: lightyellow;*/
-  margin: 3px;
-  height: 600px;
-  width: 1300px;
+  margin: 10px;
+  /*height: 600px;
+  width: 1300px;*/
+  /*max-width: 1200px;*/
 }
 
 canvas {
   display: block;
   background-image: url('images/back1.png');
   border: 5px solid black;
-  height: 600px;
-  width: 990px;
+  /*max-height: 600px;
+  height: 600px;*/
+  /*max-width: 1000px;*/
   background-size: cover;
   opacity: 0.9;
+  margin: 30px;
+}
+
+#right-user-column {
+  margin: 30px;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
 }
 
 .user-input {
   font-size: 20px;
-  height: 100px;
+  height: 250px;
+  border: 0px;
+  font-size: 22px;
+}
+
+#user-input {
+  display: flex;
+  justify-content: center;
+}
+
+#img-nums {
+  max-height: 250px;
+  background: red;
+  margin-top: 4px;
 }
 
 .user-input-button {
-  width: 40px;
-  height: 35px;
+  width: 100px;
+  height: 50px;
+  border: 2px solid black;
+  background-color: lightgreen;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+#wrapped-keep-try-button {
+  width: 400px;
+  text-align: right;
+}
+
+#next-level {
+  width: 400px;
+  text-align: right;
+}
+
+
+
+.keep-try-button {
+  width: 120px;
+  background-color: lightgrey;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 19px;
+}
+
+#button-run {
+  width: 80%;
+  text-align: center;
 }
 
 #image {
@@ -86,3 +152,33 @@ canvas {
     width: 350px;
     height: 200px;
   }
+
+  .main-page-user-input-header {
+    text-align: center;
+    font-size: 23px;
+    background-color: lightgreen;
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    height: 100px;
+    width: 100%;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 10px;
+  }
+
+  ::-webkit-input-placeholder {
+      font-size: 19px;
+      color: lightgrey;
+   }
+   :-moz-placeholder {
+     font-size: 19px;
+     color: lightgrey;
+   }
+   ::-moz-placeholder {
+     font-size: 19px;
+     color: lightgrey;
+   }
+   :-ms-input-placeholder {
+     font-size: 19px;
+     color: lightgrey;
+   }
