@@ -15,6 +15,10 @@
         alert('Next level not ready yet')
       }
 
+      function openInfoGif() {
+        return $("#info-modal").addClass("is-active");
+      }
+
     </script>
   </head>
 
@@ -39,11 +43,26 @@
       <section id="modalLose" class="modal">
         <article class="modal-content">
 
-          <h1>Ooooops, you lost!!!</h1>
+          <h3>Ooooops, you lost!!!</h3>
+           You are either was drawn in the river or eaten by dinosaur</br>
+
 
           <p><img id="lose-image" src="images/busted.gif"/></p>
-          <div id="wrapped-keep-try-button">
+          <div id="wrapped-keep-try-button-main">
             <button onclick="refreshPage()" class='keep-try-button'>Keep trying</button>
+          </div>
+        </article>
+        <div class="modal-screen js-hide-modal"></div>
+      </section>
+
+      <section id="info-modal" class="modal">
+        <article class="modal-content-gif">
+          <div class="outer-info-gif">
+
+            <div id="wrapped-keep-try-button">
+              <button onclick="refreshPage()" class='back-to-game-button'>Back to Game</button>
+            </div>
+            <p><img id="modal-gif" src="images/info-gif.gif"/></p>
           </div>
         </article>
         <div class="modal-screen js-hide-modal"></div>
@@ -65,9 +84,14 @@
 
       <div id="right-user-column">
         <div class='main-page-user-input-header'>
-          HELP DAD TO FIND KID</br></br>
-          TYPE IN CODE BELOW
-        </div></br>
+          <div>
+            <img class="info-button" onclick="openInfoGif()" src="images/menu_info.png"/>
+          </div>
+          <div>
+            HELP DAD TO FIND KID</br></br>
+            TYPE IN CODE BELOW
+          </div>
+        </div>
         <div id="user-input">
           <div>
             <img id="img-nums" src="images/123456789.png" />
@@ -83,6 +107,11 @@
           <div id="prev-inserted-header"><span>YOUR PREVIOUS CODE<span></div></br>
           <div class="outer-prev-inserted-code"><div id="prev-inserted-code"><div></div>
           </div>
+      </div></br>
+      <div class='footer-links'>
+        <div><a href="http://www.vladstadnyk.us/" >Vlad Stadnyk</a></div>
+        <div><a href="https://github.com/newcoderua" >Github</a></div>
+        <div><a href="https://www.linkedin.com/in/vladyslav-stadnyk-4aa06b107/" >LinkedIn</a></div>
       </div>
     </body>
 

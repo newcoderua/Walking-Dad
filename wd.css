@@ -1,6 +1,4 @@
 html {
-  /*height: 800px;
-  max-width: 1200px;*/
 }
 
 body {
@@ -27,6 +25,8 @@ canvas {
 
 #right-user-column {
   margin: 30px;
+  max-width: 390px;
+  height: 800px;
 }
 
 .input-placeholder {
@@ -82,13 +82,52 @@ label:focus,
 }
 
 #wrapped-keep-try-button {
-  width: 400px;
+  width: 1600px;
   text-align: right;
+  border-bottom: 1px solid grey;
+  background-color: #e2e276;
+  border-radius: 15px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  font-size: 25px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #dafbda;
+  /*border-radius: 30px;*/
+}
+
+a {
+  text-decoration: none;
+}
+.back-to-game-button {
+  width: 220px;
+  height: 80px;
+  margin: 25px;
+  font-size: 25px;
+  border-radius: 5px;
+  background-color: #11d611;
+  padding: 10px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
 #next-level {
   width: 400px;
   text-align: right;
+}
+
+.nex-level-class {
+  width: 120px;
+  height: 60px;
+  font-size: 20px;
 }
 
 
@@ -122,9 +161,9 @@ label:focus,
 #prev-inserted-header {
   display: flex;
   justify-content: center;
-  width: 400px;
+  width: 350px;
   font-size: 25px;
-  border: 1px solid lightgrey;
+  border: 1px solid black;
   color: black;
   height: 50px;
   background-color: lightgreen;
@@ -132,7 +171,12 @@ label:focus,
   border-radius: 10px;
   margin-bottom: 10px;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
 
+.info-button {
+  width: 70px;
+  height: 70px;
+  opacity: 0.9;
 }
 
 .outer-prev-inserted-code {
@@ -167,7 +211,27 @@ label:focus,
     transform: translateY(-50%);
     background: white;
     border-radius: 5px;
+    font-size: 25px;
   }
+  .modal-content-gif {
+    position: absolute;
+    z-index: 1000;
+    top: 30%;
+    left: 10%;
+    width: 1600px;
+    height: 500px;
+    /*padding: 50px;*/
+    /*margin-left: -250px;*/
+    background-color: lightyellow;
+    transform: translateY(-50%);
+    background: white;
+    border-radius: 5px;
+  }
+
+  .outer-info-gif {
+    text-align: center;
+  }
+
   .modal-close {
     position: absolute;
     top: 0;
@@ -191,8 +255,15 @@ label:focus,
     height: 200px;
   }
 
+  #modal-gif {
+    width: 1600px;
+    height: 800px;
+  }
+
   .main-page-user-input-header {
-    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 23px;
     background-color: lightgreen;
     color: black;
@@ -202,6 +273,10 @@ label:focus,
     margin: 5px;
     border: 1px solid grey;
     border-radius: 10px;
+  }
+
+  .info-button {
+    margin-right: 15px;
   }
 
   ::-webkit-input-placeholder {

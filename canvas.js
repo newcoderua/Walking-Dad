@@ -6,7 +6,6 @@ canvas.width = 1500;
 canvas.height = 800;
 
 var level1 = function() {
-  // debugger
 var pivot = canvas.height;
 
 
@@ -14,7 +13,6 @@ var pivot = canvas.height;
   var angryDino = document.getElementById("dyno");
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
-  // c.drawImage(angryDino, dynoX, dynoY, 200, 200)
   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 3, canvas.height / 3)
 
 
@@ -81,6 +79,7 @@ var pivot = canvas.height;
 
   function reachGoal() {
     if (getDistance(moveX, moveY, kidX, kidY) < 100) {
+      freezeDad();
       handleWinSituationModal();
       window.addEventListener('click', () => $("#modal").removeClass("is-active"));
     }
@@ -95,23 +94,25 @@ var pivot = canvas.height;
   function reachDanger() {
     window.moveX = moveX;
     window.moveY = moveY;
-    if (getDistance(moveX, moveY, dynoX, dynoY) < 100) {
-      // debugger
+    if (getDistance(moveX, moveY, dynoX, dynoY) < 130) {
+      freezeDad();
       handleLoseSituationModal();
-      // $('modal-close js-hide-modal').onclick($("#modalLose").removeClass("is-active"))
-      // window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
-    } else if (getDistance(moveX, moveY, canvas.width / 2, cb()) < 100) {
+      } else if (getDistance(moveX, moveY, canvas.width / 2, cb()) < 130) {
+        freezeDad();
       handleLoseSituationModal();
-      // debugger
-      // $('modal-close js-hide-modal').onclick($("#modalLose").removeClass("is-active"))
-      // window.addEventListener('click', () => $("#modalLose").removeClass("is-active"));
     }
+  }
+
+  function freezeDad() {
+    clearInterval(window.int1);
+    clearInterval(window.int2);
+    clearInterval(window.int3);
+    clearInterval(window.int4);
   }
 
 
 
   function cb() {
-    // debugger
     if ((moveY > ((canvas.height / 3) + 40)) && (moveY < ((canvas.height / 3) + 120))) {
       return 1000000;
     } else {
@@ -129,9 +130,7 @@ var pivot = canvas.height;
 
 
   function runMove(moves) {
-    // debugger
     if (moves.length < 1) {
-      // debugger
       if ($("#modal")[0].className === "modal is-active") {
         return;
       }
@@ -140,7 +139,6 @@ var pivot = canvas.height;
     var move = moves.shift();
     var dir = move.split(' ')[0];
     var step = move.split(' ')[1];
-    // debugger
     useDirAndStep(dir, step);
 
   }
@@ -148,20 +146,14 @@ var pivot = canvas.height;
   window.addEventListener('submit', (e) => {
     e.preventDefault();
       window.moves = $('textarea')[0].value.split(/\n/);
-      // debugger
-      // $('#textArea').html('<p>' + text + '<p>');
       window.localStorage['placeholder'] = moves;
-      // window.prevMoves = $('textarea')[0].value
       runMove(moves);
-
-
-
   });
 
   function useDirAndStep(dir, step) {
     switch (dir) {
       case "right":
-        var int1 = setInterval(right, 200);
+        window.int1 = setInterval(right, 200);
         var initX = moveX;
         function  right() {
           // debugger
@@ -179,7 +171,7 @@ var pivot = canvas.height;
         }
         break;
       case "left":
-        var int3 = setInterval(left, 200);
+        window.int3 = setInterval(left, 200);
         var initX = moveX;
         function  left() {
           // debugger
@@ -196,7 +188,7 @@ var pivot = canvas.height;
         }
         break;
       case "up":
-        var int4 = setInterval(up, 200);
+        window.int4 = setInterval(up, 200);
         var initY = moveY;
         function  up() {
           // debugger
@@ -213,7 +205,7 @@ var pivot = canvas.height;
         }
         break;
       case "down":
-        var int2 = setInterval(down, 200);
+        window.int2 = setInterval(down, 200);
         var initY = moveY;
         function  down() {
           // debugger
@@ -265,12 +257,6 @@ var pivot = canvas.height;
     });
 
 }
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     $('textarea').focus();
-//     level1();
-//   });
 
   $(window).ready(function() {
     // debugger
