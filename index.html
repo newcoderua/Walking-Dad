@@ -6,12 +6,15 @@
     <link rel="stylesheet" type="text/css" href="wd.css">
     <script>
        function refreshPage() {
+         document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'];
+
         location.reload();
       }
 
       function startNextLevel() {
         alert('Next level not ready yet')
       }
+
     </script>
   </head>
 
@@ -76,6 +79,10 @@
             <div id="button-run"><button class="user-input-button" type="submit" name="RUN">RUN</button></div>
           </form>
         </div>
+        <div class="prev-code">
+          <div id="prev-inserted-header"><span>YOUR PREVIOUS CODE<span></div></br>
+          <div class="outer-prev-inserted-code"><div id="prev-inserted-code"><div></div>
+          </div>
       </div>
     </body>
 

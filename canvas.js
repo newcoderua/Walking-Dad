@@ -41,22 +41,6 @@ var pivot = canvas.height;
     startX, startY, dadImage.width / 2.4, 1300,
     moveX, moveY, dadImage.width / 6, 360)
 
-  // var dadImage = new Image();
-  // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
-  // dadImage.width = canvas.height;
-  // dadImage.height = canvas.height / 5;
-  // // var delta = dadImage.width / 2.6;
-  // var startX = 0;
-  // var startY = 0;
-  // var moveX = canvas.height / 6;
-  // var moveY = canvas.height / 6;
-  // // c.drawImage(dadImage,
-  // //   startX, startY, dadImage.width / 2.4, canvas.height * 2,
-  // //   moveX, moveY, dadImage.width / 6, canvas.height / 2);
-  // c.drawImage(dadImage, startX, startY, dadImage.width / 3.8, dadImage.height * 3,
-  //                       moveX, moveY, canvas.height / 4.5, canvas.height / 3.5)
-
-
   function walkRightLeft() {
     // debugger
     if (startX <= 1300) {
@@ -109,6 +93,8 @@ var pivot = canvas.height;
   }
 
   function reachDanger() {
+    window.moveX = moveX;
+    window.moveY = moveY;
     if (getDistance(moveX, moveY, dynoX, dynoY) < 100) {
       // debugger
       handleLoseSituationModal();
@@ -162,6 +148,10 @@ var pivot = canvas.height;
   window.addEventListener('submit', (e) => {
     e.preventDefault();
       window.moves = $('textarea')[0].value.split(/\n/);
+      // debugger
+      // $('#textArea').html('<p>' + text + '<p>');
+      window.localStorage['placeholder'] = moves;
+      // window.prevMoves = $('textarea')[0].value
       runMove(moves);
 
 
@@ -283,6 +273,8 @@ var pivot = canvas.height;
 //   });
 
   $(window).ready(function() {
+    // debugger
+    document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
     $('textarea').focus();
       level1();
   });

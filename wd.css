@@ -29,6 +29,13 @@ canvas {
   margin: 30px;
 }
 
+.input-placeholder {
+  max-width: 150px;
+  height: 180px;
+  border: 1px solid lightgrey;
+  margin-top: 20px;
+}
+
 textarea:hover,
 input:hover,
 textarea:active,
@@ -71,6 +78,7 @@ label:focus,
   background-color: lightgreen;
   border-radius: 20px;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 
 #wrapped-keep-try-button {
@@ -102,6 +110,36 @@ label:focus,
   width: 150px;
   height: 150px;
 }
+
+#prev-inserted-code {
+  /*margin: 35px;*/
+  width: 120px;
+  height: 200px;
+  font-size: 28px;
+  color: grey;
+}
+
+#prev-inserted-header {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  font-size: 25px;
+  border: 1px solid lightgrey;
+  color: black;
+  height: 50px;
+  background-color: lightgreen;
+  padding: 7px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+
+}
+
+.outer-prev-inserted-code {
+  display: flex;
+  justify-content: center;
+}
+
 
 .modal {
     display: none;
