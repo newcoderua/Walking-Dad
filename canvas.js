@@ -2,8 +2,8 @@ var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
 
-canvas.width = 1500;
-canvas.height = 800;
+canvas.width = 1000;
+canvas.height = 600;
 
 var level1 = function() {
 
@@ -12,7 +12,7 @@ var level1 = function() {
   var angryDino = document.getElementById("dyno");
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
-  c.drawImage(angryDino, dynoX, dynoY, canvas.height / 3, canvas.height / 3)
+  c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
 
 
 
@@ -21,52 +21,63 @@ var level1 = function() {
   var kidX = (canvas.width / 2) + canvas.height / 2;;
   var kidY = (canvas.height / 2) - canvas.height / 2;
   var img2 = document.getElementById("kid");
-  c.drawImage(img2, kidX, kidY, canvas.height / 6, canvas.height / 6);
+  c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
 
   //dad
   // var dadImage = new Image();
   // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
   var dadImage = document.getElementById("dad");
-  dadImage.width = 600;
-  dadImage.height = 120;
-  var delta = dadImage.width / 2.6;
+  // dadImage.width = 600;
+  // dadImage.height = 120;
+  // var delta = dadImage.width / 2.6;
+  // var startX = 0;
+  // var startY = 0;
+  // var moveX = 158;
+  // var moveY = 100;
+  // c.drawImage(dadImage,
+  //   startX, startY, dadImage.width / 2.4, 1300,
+  //   moveX, moveY, dadImage.width / 6, 360)
+
+  dadImage.width = 280;
+  dadImage.height = 60;
+  var delta = dadImage.width / 1.05;
   var startX = 0;
   var startY = 0;
-  var moveX = 158;
-  var moveY = 100;
+  var moveX = 120;
+  var moveY = 120;
   c.drawImage(dadImage,
-    startX, startY, dadImage.width / 2.4, 1300,
-    moveX, moveY, dadImage.width / 6, 360)
+                      startX, startY, dadImage.width / 1.4, 560,
+                      moveX, moveY, dadImage.width / 4, 130)
 
   function walkRightLeft() {
     // debugger
-    if (startX <= 1300) {
+    if (startX <= 500) {
       startX += delta;
       return c.drawImage(dadImage,
-                          startX + 49, 0, dadImage.width / 2.89, 1200,
-                          moveX, moveY, dadImage.width / 6, 360);
+                          startX, startY, dadImage.width / 1.4, 560,
+                          moveX, moveY, dadImage.width / 4, 130);
     }
       startX = 0;
       return c.drawImage(dadImage,
-                          startX + 49, 0, dadImage.width / 2.89, 1200,
-                          moveX, moveY, dadImage.width / 6, 360);
+                          startX, startY, dadImage.width / 1.4, 560,
+                          moveX, moveY, dadImage.width / 4, 130);
   }
 
   function walkUpDown() {
-    if (startX <= 1300) {
+    if (startX <= 500) {
       startX += delta;
       return c.drawImage(dadImage,
-                          startX + 49, 0, dadImage.width / 2.89, 1200,
-                          moveX, moveY, dadImage.width / 6, 360);
+                          startX, startY, dadImage.width / 1.4, 560,
+                          moveX, moveY, dadImage.width / 4, 130);
     }
       startX = 0;
     return c.drawImage(dadImage,
-                        startX + 49, 0, dadImage.width / 2.89, 1200,
-                        moveX, moveY, dadImage.width / 6, 360);
+                        startX, startY, dadImage.width / 1.4, 560,
+                        moveX, moveY, dadImage.width / 4, 130);
   }
 
   function clearPrevDad() {
-    c.clearRect(moveX, moveY, 120, 155);
+    c.clearRect(moveX, moveY, 120, 150);
   }
 
   function getDistance(x1, y1, x2, y2) {
@@ -112,7 +123,7 @@ var level1 = function() {
 
 
   function cb() {
-    if ((moveY > ((canvas.height / 3) + 40)) && (moveY < ((canvas.height / 3) + 120))) {
+    if ((moveY > ((canvas.height / 4) + 20)) && (moveY < ((canvas.height / 4) + 120))) {
       return 1000000;
     } else {
       return moveY;
@@ -221,7 +232,9 @@ var level1 = function() {
         }
         break;
       default:
-
+        c.drawImage(dadImage,
+                          startX, startY, dadImage.width / 1.4, 540,
+                          moveX, moveY, dadImage.width / 4, 130)
     }
 
 }
