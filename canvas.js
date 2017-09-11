@@ -1,6 +1,3 @@
-
-
-
 var level1 = function() {
   var canvas = document.querySelector('canvas');
   var c = canvas.getContext('2d');
@@ -9,8 +6,6 @@ var level1 = function() {
   canvas.width = 1000;
   canvas.height = 600;
   var background = new Image();
-  // background.width = 500;
-  // background.height = 200;
   background.src = "https://s3.amazonaws.com/sportbnb-dev/back1.png";
   c.drawImage(background, 0, 0, 1000, 600);
   // dyno
@@ -19,7 +14,6 @@ var level1 = function() {
   // debugger
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
-  // var angryDino = document.getElementById("dyno");
   // debugger
   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
 
@@ -28,11 +22,9 @@ var level1 = function() {
   var kidY = (canvas.height / 2) - canvas.height / 2;
   var img2 = new Image();
   img2.src = "https://s3.amazonaws.com/sportbnb-dev/Dapino-Baby-Boy-Baby-laughing.ico";
-  // var img2 = document.getElementById("kid");
   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
 
   //dad
-  // var dadImage = document.getElementById("dad");
   var dadImage = new Image();
   dadImage.src = "https://s3.amazonaws.com/sportbnb-dev/spritesheet.png";
   dadImage.width = 280;
@@ -121,8 +113,6 @@ var level1 = function() {
     clearInterval(window.int4);
   }
 
-
-
   function cb() {
     if ((moveY > ((canvas.height / 4) + 20)) && (moveY < ((canvas.height / 4) + 120))) {
       return 1000000;
@@ -130,8 +120,6 @@ var level1 = function() {
       return moveY;
     }
   }
-
-
 
   function handleLoseSituationModal() {
       $(document).ready(function(){
@@ -167,10 +155,8 @@ var level1 = function() {
         window.int1 = setInterval(right, 200);
         var initX = moveX;
         function  right() {
-          // debugger
           if (moveX - parseInt(step) === initX) {
             clearInterval(int1);
-            // debugger
             runMove(moves);
           } else {
             reachGoal();
@@ -185,7 +171,6 @@ var level1 = function() {
         window.int3 = setInterval(left, 200);
         var initX = moveX;
         function  left() {
-          // debugger
           if (moveX + parseInt(step) === initX) {
             clearInterval(int3);
             runMove(moves);
@@ -263,7 +248,6 @@ var level1 = function() {
       walkUpDown();
       break;
       default:
-      // debugger
       c.drawImage(dadImage,
                           startX, startY, dadImage.width / 1.4, 560,
                           moveX, moveY, dadImage.width / 4, 130)
@@ -274,8 +258,9 @@ var level1 = function() {
 
   window.addEventListener("DOMContentLoaded", () => {
     // debugger
-    document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
+    if (window.localStorage['placeholder'] !== undefined) {
+      document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
+    }
     $('textarea').focus();
       level1();
   });
-// implementation
