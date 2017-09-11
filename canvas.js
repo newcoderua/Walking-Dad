@@ -4,12 +4,15 @@
 var level1 = function() {
   var canvas = document.querySelector('canvas');
   var c = canvas.getContext('2d');
-  
+
 
   canvas.width = 1000;
   canvas.height = 600;
-
-
+  var background = new Image();
+  // background.width = 500;
+  // background.height = 200;
+  background.src = "https://s3.amazonaws.com/sportbnb-dev/back1.png";
+  c.drawImage(background, 0, 0, 1000, 600);
   // dyno
   var angryDino = new Image();
   angryDino.src = "https://s3.amazonaws.com/sportbnb-dev/t-rex4.png";
@@ -72,6 +75,10 @@ var level1 = function() {
 
   function clearPrevDad() {
     c.clearRect(moveX, moveY, 120, 150);
+    c.drawImage(background, 0, 0, 1000, 600);
+    c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4);
+    c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
+
   }
 
   function getDistance(x1, y1, x2, y2) {
