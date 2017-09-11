@@ -1,30 +1,37 @@
-var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
 
 
-canvas.width = 1000;
-canvas.height = 600;
 
 var level1 = function() {
+  var canvas = document.querySelector('canvas');
+  var c = canvas.getContext('2d');
+  
+
+  canvas.width = 1000;
+  canvas.height = 600;
 
 
   // dyno
-  var angryDino = document.getElementById("dyno");
+  var angryDino = new Image();
+  angryDino.src = "https://s3.amazonaws.com/sportbnb-dev/t-rex4.png";
+  // debugger
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
+  // var angryDino = document.getElementById("dyno");
   // debugger
-  // var angryDino = new Image();
-  // angryDino.src = ""
   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
 
   // kid
   var kidX = (canvas.width / 2) + canvas.height / 2;;
   var kidY = (canvas.height / 2) - canvas.height / 2;
-  var img2 = document.getElementById("kid");
+  var img2 = new Image();
+  img2.src = "https://s3.amazonaws.com/sportbnb-dev/baby-297143_960_720.png";
+  // var img2 = document.getElementById("kid");
   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
 
   //dad
-  var dadImage = document.getElementById("dad");
+  // var dadImage = document.getElementById("dad");
+  var dadImage = new Image();
+  dadImage.src = "https://s3.amazonaws.com/sportbnb-dev/spritesheet.png";
   dadImage.width = 280;
   dadImage.height = 60;
   var delta = dadImage.width / 1.05;
@@ -258,7 +265,7 @@ var level1 = function() {
 
 }
 
-  $(window).ready(function() {
+  window.addEventListener("DOMContentLoaded", () => {
     // debugger
     document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
     $('textarea').focus();
