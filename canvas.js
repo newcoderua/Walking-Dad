@@ -27,6 +27,7 @@ var level1 = function() {
   // var dadImage = new Image();
   // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
   var dadImage = document.getElementById("dad");
+  // dadImage.src = "https://github.com/newcoderua/Walking-Dad/blob/master/images/walking-dad.png"
   // dadImage.width = 600;
   // dadImage.height = 120;
   // var delta = dadImage.width / 2.6;
@@ -262,9 +263,10 @@ var level1 = function() {
       walkUpDown();
       break;
       default:
+      // debugger
       c.drawImage(dadImage,
-        startX, startY, dadImage.width / 2.4, 1300,
-        moveX, moveY, dadImage.width / 6, 360)
+                          startX, startY, dadImage.width / 1.4, 560,
+                          moveX, moveY, dadImage.width / 4, 130)
       }
     });
 
