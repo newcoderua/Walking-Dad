@@ -27,7 +27,7 @@ var level1 = function() {
   var kidX = (canvas.width / 2) + canvas.height / 2;;
   var kidY = (canvas.height / 2) - canvas.height / 2;
   var img2 = new Image();
-  img2.src = "https://s3.amazonaws.com/sportbnb-dev/baby-297143_960_720.png";
+  img2.src = "https://s3.amazonaws.com/sportbnb-dev/Dapino-Baby-Boy-Baby-laughing.ico";
   // var img2 = document.getElementById("kid");
   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
 
