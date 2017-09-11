@@ -6,7 +6,6 @@ canvas.width = 1500;
 canvas.height = 800;
 
 var level1 = function() {
-var pivot = canvas.height;
 
 
   // dyno
@@ -21,13 +20,13 @@ var pivot = canvas.height;
   // kid
   var kidX = (canvas.width / 2) + canvas.height / 2;;
   var kidY = (canvas.height / 2) - canvas.height / 2;
-  var img2 = document.getElementById("image2");
-  // c.drawImage(img2, kidX, kidY, 100, 100);
+  var img2 = document.getElementById("kid");
   c.drawImage(img2, kidX, kidY, canvas.height / 6, canvas.height / 6);
 
   //dad
-  var dadImage = new Image();
-  dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
+  // var dadImage = new Image();
+  // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
+  var dadImage = document.getElementById("dad");
   dadImage.width = 600;
   dadImage.height = 120;
   var delta = dadImage.width / 2.6;
