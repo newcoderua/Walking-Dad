@@ -12,10 +12,10 @@ var level1 = function() {
   var angryDino = document.getElementById("dyno");
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
+  // debugger
+  // var angryDino = new Image();
+  // angryDino.src = ""
   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
-
-
-
 
   // kid
   var kidX = (canvas.width / 2) + canvas.height / 2;;
@@ -24,21 +24,7 @@ var level1 = function() {
   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
 
   //dad
-  // var dadImage = new Image();
-  // dadImage.src = 'https://s3.amazonaws.com/sportbnb-dev/spritesheet.png'
   var dadImage = document.getElementById("dad");
-  // dadImage.src = "https://github.com/newcoderua/Walking-Dad/blob/master/images/walking-dad.png"
-  // dadImage.width = 600;
-  // dadImage.height = 120;
-  // var delta = dadImage.width / 2.6;
-  // var startX = 0;
-  // var startY = 0;
-  // var moveX = 158;
-  // var moveY = 100;
-  // c.drawImage(dadImage,
-  //   startX, startY, dadImage.width / 2.4, 1300,
-  //   moveX, moveY, dadImage.width / 6, 360)
-
   dadImage.width = 280;
   dadImage.height = 60;
   var delta = dadImage.width / 1.05;
