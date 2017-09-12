@@ -7,18 +7,14 @@
     <script>
        function refreshPage() {
          document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'];
-
         location.reload();
       }
-
       function startNextLevel() {
         alert('Next level not ready yet')
       }
-
       function openInfoGif() {
         return $("#info-modal").addClass("is-active");
       }
-
     </script>
     <script type="text/javascript" src='canvas.js'></script>
   </head>
@@ -88,8 +84,8 @@
           <div>
             <img class="info-button" onclick="openInfoGif()" src="images/menu_info.png"/>
           </div>
-          <div>
-            HELP DAD TO FIND KID</br></br>
+          <div id="type-in-code">
+
             TYPE IN CODE BELOW
           </div>
         </div>

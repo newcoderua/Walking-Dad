@@ -1,4 +1,7 @@
+
+
 var level1 = function() {
+
   var canvas = document.querySelector('canvas');
   var c = canvas.getContext('2d');
 
@@ -23,6 +26,13 @@ var level1 = function() {
   var img2 = new Image();
   img2.src = "https://s3.amazonaws.com/sportbnb-dev/Dapino-Baby-Boy-Baby-laughing.ico";
   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
+
+  //ruler
+  var rulerX = 20;
+  var rulerY = 20;
+  var ruler = new Image();
+  ruler.src = "https://s3.amazonaws.com/sportbnb-dev/ruler3.png";
+  c.drawImage(ruler, rulerX, rulerY, 60, 60);
 
   //dad
   var dadImage = new Image();
@@ -155,7 +165,7 @@ var level1 = function() {
         window.int1 = setInterval(right, 200);
         var initX = moveX;
         function  right() {
-          if (moveX - parseInt(step) === initX) {
+          if (moveX - parseInt(step) >= initX) {
             clearInterval(int1);
             runMove(moves);
           } else {
@@ -171,7 +181,7 @@ var level1 = function() {
         window.int3 = setInterval(left, 200);
         var initX = moveX;
         function  left() {
-          if (moveX + parseInt(step) === initX) {
+          if (moveX + parseInt(step) <= initX) {
             clearInterval(int3);
             runMove(moves);
           } else {
@@ -188,7 +198,7 @@ var level1 = function() {
         var initY = moveY;
         function  up() {
           // debugger
-          if (moveY + parseInt(step) === initY) {
+          if (moveY + parseInt(step) <= initY) {
             clearInterval(int4);
             runMove(moves);
           } else {
@@ -205,7 +215,7 @@ var level1 = function() {
         var initY = moveY;
         function  down() {
           // debugger
-          if (moveY - parseInt(step) === initY) {
+          if (moveY - parseInt(step) >= initY) {
             clearInterval(int2);
             runMove(moves);
           } else {
