@@ -70,13 +70,16 @@
 "use strict";
 
 
-var _ruler = __webpack_require__(1);
-
-var startRuler = _ruler.ruler;
+// import { ruler } from './ruler.js';
+// const startRuler = ruler;
 
 window.addEventListener("DOMContentLoaded", function () {
-  startRuler();
+  // startRuler();
+  var posXclick = 0;
+  var posYclick = 0;
   window.localStorage['drag'] = "false";
+  window.localStorage["markedPlace"] = 'false';
+  window.localStorage["rulerInUse"] = "false";
 
   if (window.localStorage['placeholder'] !== undefined) {
     document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n');
@@ -111,60 +114,77 @@ window.addEventListener("DOMContentLoaded", function () {
   var rulerY = 20;
   var ruler = new Image();
   ruler.src = "https://s3.amazonaws.com/sportbnb-dev/ruler3.png";
-  ruler.draggable = true;
+  // ruler.draggable = true;
   c.drawImage(ruler, rulerX, rulerY, 60, 60);
 
   // check dragability
-  // var selected = false;
-  //
-  // var mouse = { x: 0, y: 0, down: false }
-  //
-  // window.onmousemove = (e) => {
-  //   mouse.x = e.pageX;
-  //   mouse.y = e.pageY;
-  //   console.log(mouse.x);
-  //   console.log(mouse.y);
-  //   if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
-  //     // debugger
-  //     window.onmousedown = () => {
-  //       // debugger
-  //       window.localStorage["drag"] = "true";
-  //     }
-  //   }
-  //   if (window.localStorage["drag"] === "true") {
-  //     // debugger
-  //     keepPaintRuler()
-  //   }
-  // };
-  //
-  // function keepPaintRuler(click = null) {
-  //   c.clearRect(mouse.x, mouse.y, 70, 70);
-  //   c.drawImage(background, 0, 0, 1000, 600);
-  //   // c.drawImage(ruler, rulerX, rulerY, 60, 60);
-  //   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
-  //   c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
-  //   c.drawImage(dadImage,
-  //     startX, startY, dadImage.width / 1.4, 560,
-  //     moveX, moveY, dadImage.width / 4, 130)
-  //   c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
-  //   // if (click) {
-  //   //   var
-  //   //   c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
-  //   // }
-  // }
-  //
-  // window.onclick = () => {
-  //   if (window.localStorage["drag"] === "true") {
-  //
-  //   }
-  // };
-  //
-  // window.onmouseup = () => {
-  //   // window.localStorage["drag"] = 'false';
-  //   // c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
-  // };
 
-  //
+
+  var mouse = { x: 0, y: 0, down: false, setXPos: 0, setYPos: 0 };
+  window.onmousemove = function (e) {
+    mouse.x = e.pageX;
+    mouse.y = e.pageY;
+    // console.log(mouse.x);
+    // console.log(mouse.y);
+    if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
+      // debugger
+      window.onmousedown = function () {
+        window.localStorage["drag"] = "true";
+        // window.localStorage['putRulerBack'] = 'false';
+        // debugger
+      };
+    }
+    if (window.localStorage["drag"] === "true") {
+      // window.localStorage["rulerInUse"] === "true";
+      // debugger
+      keepPaintRuler();
+    }
+  };
+
+  function keepPaintRuler() {
+    var click = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    c.clearRect(mouse.x, mouse.y, 70, 70);
+    c.drawImage(background, 0, 0, 1000, 600);
+    // c.drawImage(ruler, rulerX, rulerY, 60, 60);
+    c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4);
+    c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
+    c.drawImage(dadImage, startX, startY, dadImage.width / 1.4, 560, moveX, moveY, dadImage.width / 4, 130);
+    c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
+    // debugger
+    if (posXclick !== 0) {
+      // c.drawImage(ruler, posXclick, posYclick, 70, 70);
+      c.beginPath();
+      c.moveTo(posXclick + 20, posYclick + 20);
+      // debugger
+      c.lineTo(mouse.x, mouse.y);
+      c.stroke();
+      c.font = "30px Arial";
+      var distTo = Math.floor(getDistance(mouse.x, mouse.y, posXclick, posYclick));
+      c.fillText("" + (distTo - 70), mouse.x + 10, mouse.y + 50);
+      // debugger
+    }
+  }
+
+  window.onclick = function () {
+    // debugger
+    if (window.localStorage["drag"] === "true" && getDistance(mouse.x, mouse.y, rulerX, rulerY) > 120 && posXclick !== 0) {
+      // debugger
+      posXclick = 0;
+      keepPaintRuler();
+    } else if (window.localStorage["drag"] === "true" && getDistance(mouse.x, mouse.y, rulerX, rulerY) > 120) {
+      // debugger
+      window.localStorage["rulerInUse"] = "true";
+      posXclick = mouse.x - 40;
+      posYclick = mouse.y - 40;
+    } else if (window.localStorage["drag"] === "true" && getDistance(mouse.x, mouse.y, rulerX, rulerY) < 120 && window.localStorage["rulerInUse"] === "true") {
+      // debugger
+      window.localStorage["drag"] = "false";
+      window.localStorage["rulerInUse"] = 'false';
+      // debugger
+      // window.localStorage['putRulerBack'] = 'true';
+    }
+  };
 
   //dad
   var dadImage = new Image();
@@ -284,10 +304,7 @@ window.addEventListener("DOMContentLoaded", function () {
   function useDirAndStep(dir, step) {
     switch (dir) {
       case "right":
-        debugger;
-        window.int1 = setInterval(right, 200);
-        var initX = moveX;
-
+        // debugger
         var right = function right() {
           if (moveX - parseInt(step) >= initX) {
             clearInterval(int1);
@@ -301,11 +318,10 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         };
 
+        window.int1 = setInterval(right, 200);
+        var initX = moveX;
         break;
       case "left":
-        window.int3 = setInterval(left, 200);
-        var initX = moveX;
-
         var left = function left() {
           if (moveX + parseInt(step) <= initX) {
             clearInterval(int3);
@@ -319,11 +335,10 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         };
 
+        window.int3 = setInterval(left, 200);
+        var initX = moveX;
         break;
       case "up":
-        window.int4 = setInterval(up, 200);
-        var initY = moveY;
-
         var up = function up() {
           // debugger
           if (moveY + parseInt(step) <= initY) {
@@ -338,11 +353,10 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         };
 
+        window.int4 = setInterval(up, 200);
+        var initY = moveY;
         break;
       case "down":
-        window.int2 = setInterval(down, 200);
-        var initY = moveY;
-
         var down = function down() {
           // debugger
           if (moveY - parseInt(step) >= initY) {
@@ -357,6 +371,8 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         };
 
+        window.int2 = setInterval(down, 200);
+        var initY = moveY;
         break;
       default:
         c.drawImage(dadImage, startX, startY, dadImage.width / 1.4, 540, moveX, moveY, dadImage.width / 4, 130);
@@ -389,23 +405,6 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-// level1();
-
-
-//lobodaaaa
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var ruler = exports.ruler = function ruler() {};
 
 /***/ })
 /******/ ]);
