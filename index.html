@@ -4,23 +4,28 @@
     <meta charset="utf-8">
     <title>WD</title>
     <link rel="stylesheet" type="text/css" href="wd.css">
+    <script src="https://cdn.rawgit.com/konvajs/konva/1.6.5/konva.min.js"></script>
     <script>
        function refreshPage() {
          document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'];
+         window.localStorage['drag'] = 'false';
         location.reload();
-      }
-      function startNextLevel() {
-        alert('Next level not ready yet')
-      }
-      function openInfoGif() {
-        return $("#info-modal").addClass("is-active");
-      }
+        }
+        function startNextLevel() {
+          alert('Next level not ready yet')
+        }
+        function openInfoGif() {
+          return $("#info-modal").addClass("is-active");
+        }
+        function dragstart_handler(ev) {
+         console.log("dragStart");
+         // Add the target element's id to the data transfer object
+         ev.dataTransfer.setData("text/plain", ev.target.id);
+        }
     </script>
-    <script type="text/javascript" src='canvas.js'></script>
+    <script type="text/javascript" src='./canvas.js'></script>
   </head>
-
     <body>
-
       <section id="modal" class="modal">
         <article class="modal-content">
           <h1>Yeeeaaah, you completed first challenge!</h1>

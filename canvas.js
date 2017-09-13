@@ -1,7 +1,15 @@
+// import { ruler } from './ruler.js';
+// const startRuler = ruler;
 
+window.addEventListener("DOMContentLoaded", () => {
+  // startRuler();
+  window.localStorage['drag'] = "false";
+  window.localStorage["markedPlace"] = 'false';
 
-var level1 = function() {
-
+  if (window.localStorage['placeholder'] !== undefined) {
+    document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
+  }
+  $('textarea').focus();
   var canvas = document.querySelector('canvas');
   var c = canvas.getContext('2d');
 
@@ -32,7 +40,70 @@ var level1 = function() {
   var rulerY = 20;
   var ruler = new Image();
   ruler.src = "https://s3.amazonaws.com/sportbnb-dev/ruler3.png";
+  ruler.draggable = true;
   c.drawImage(ruler, rulerX, rulerY, 60, 60);
+
+  // check dragability
+  var selected = false;
+
+  var mouse = { x: 0, y: 0, down: false, setXPos: 0, setYPos: 0 }
+
+  window.onmousemove = (e) => {
+    mouse.x = e.pageX;
+    mouse.y = e.pageY;
+    console.log(mouse.x);
+    console.log(mouse.y);
+    if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
+      // debugger
+      window.onmousedown = () => {
+        // debugger
+        window.localStorage["drag"] = "true";
+        window.localStorage["rulerInUse"] = "false";
+      }
+    }
+    if (window.localStorage["drag"] === "true") {
+      // debugger
+      keepPaintRuler()
+    }
+  };
+
+  function keepPaintRuler(click = null) {
+    c.clearRect(mouse.x, mouse.y, 70, 70);
+    c.drawImage(background, 0, 0, 1000, 600);
+    // c.drawImage(ruler, rulerX, rulerY, 60, 60);
+    c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
+    c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
+    c.drawImage(dadImage,
+      startX, startY, dadImage.width / 1.4, 560,
+      moveX, moveY, dadImage.width / 4, 130)
+    c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
+    // debugger
+    //
+    // if (marked) {
+    //   marked
+    // }
+    // if (window.localStorage["markedPlace"] === "true") {
+    //   const coordX = mouse.x;
+    //   const coordY = mouse.y;
+    //   var marked = c.drawImage(ruler, coordX - 40, coordY - 40, 100, 100);
+    //
+    //   window.localStorage["markedPlace"] = "false";
+    // }
+  }
+
+  window.onclick = () => {
+    // debugger
+    if ((window.localStorage["drag"] === "true") && (getDistance(mouse.x, mouse.y, rulerX, rulerY)) > 120) {
+      window.localStorage["markedPlace"] = "true";
+    }
+  };
+
+  window.onmouseup = () => {
+    // window.localStorage["drag"] = 'false';
+    // c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
+  };
+
+  //
 
   //dad
   var dadImage = new Image();
@@ -80,6 +151,7 @@ var level1 = function() {
     c.drawImage(background, 0, 0, 1000, 600);
     c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4);
     c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
+    c.drawImage(ruler, rulerX, rulerY, 60, 60);
 
   }
 
@@ -162,6 +234,7 @@ var level1 = function() {
   function useDirAndStep(dir, step) {
     switch (dir) {
       case "right":
+      // debugger
         window.int1 = setInterval(right, 200);
         var initX = moveX;
         function  right() {
@@ -232,45 +305,43 @@ var level1 = function() {
                           startX, startY, dadImage.width / 1.4, 540,
                           moveX, moveY, dadImage.width / 4, 130)
     }
+  }
+  window.addEventListener('keydown', (e) => {
+    console.log(moveX, moveY);
+    reachGoal();
+    reachDanger();
+    clearPrevDad();
+    switch (e.which) {
+      case 37:
+      moveX -= 30;
+      walkRightLeft();
+      break;
+      case 40:
+      moveY += 30;
+      walkUpDown();
+      break;
+      case 39:
+      moveX += 30;
+      walkRightLeft();
+      break;
+      case 38:
+      moveY -= 30;
+      walkUpDown();
+      break;
+      default:
+      c.drawImage(dadImage,
+        startX, startY, dadImage.width / 1.4, 560,
+        moveX, moveY, dadImage.width / 4, 130)
+      }
+    });
+})
 
-}
 
-  // window.addEventListener('keydown', (e) => {
-  //   console.log(moveX, moveY);
-  //   reachGoal();
-  //   reachDanger();
-  //   clearPrevDad();
-  //   switch (e.which) {
-  //     case 37:
-  //     moveX -= 30;
-  //     walkRightLeft();
-  //     break;
-  //     case 40:
-  //     moveY += 30;
-  //     walkUpDown();
-  //     break;
-  //     case 39:
-  //     moveX += 30;
-  //     walkRightLeft();
-  //     break;
-  //     case 38:
-  //     moveY -= 30;
-  //     walkUpDown();
-  //     break;
-  //     default:
-  //     c.drawImage(dadImage,
-  //                         startX, startY, dadImage.width / 1.4, 560,
-  //                         moveX, moveY, dadImage.width / 4, 130)
-  //     }
-  //   });
 
-}
 
-  window.addEventListener("DOMContentLoaded", () => {
-    // debugger
-    if (window.localStorage['placeholder'] !== undefined) {
-      document.getElementById("prev-inserted-code").innerHTML = window.localStorage['placeholder'].split(',').join('\n')
-    }
-    $('textarea').focus();
-      level1();
-  });
+
+
+      // level1();
+
+
+  //lobodaaaa

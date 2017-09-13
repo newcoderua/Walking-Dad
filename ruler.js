@@ -1,7 +1,3 @@
-
-
-function ruler() {
-  alert('Yooo')
+export const ruler = () => {
+  
 }
-
-export default Ruler;
