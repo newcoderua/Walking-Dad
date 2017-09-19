@@ -1,8 +1,6 @@
-// import { ruler } from './ruler.js';
-// const startRuler = ruler;
 
 window.addEventListener("DOMContentLoaded", () => {
-  // startRuler();
+  // debugger
   var posXclick = 0;
   var posYclick = 0;
   window.localStorage['drag'] = "false";
@@ -26,10 +24,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // dyno
   var angryDino = new Image();
   angryDino.src = "https://s3.amazonaws.com/sportbnb-dev/t-rex4.png";
-  // debugger
   var dynoX = (canvas.width / 2) + canvas.height / 2;
   var dynoY = (canvas.height / 2) - canvas.height / 6;
-  // debugger
   c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
 
   // kid
@@ -44,29 +40,30 @@ window.addEventListener("DOMContentLoaded", () => {
   var rulerY = 20;
   var ruler = new Image();
   ruler.src = "https://s3.amazonaws.com/sportbnb-dev/ruler3.png";
-  // ruler.draggable = true;
   c.drawImage(ruler, rulerX, rulerY, 60, 60);
 
   // check dragability
 
-
   var mouse = { x: 0, y: 0, down: false, setXPos: 0, setYPos: 0 }
   window.onmousemove = (e) => {
-    mouse.x = e.pageX;
+    console.log(e.pageX);
+    console.log(window.innerWidth - canvas.width);
+    // console.log(canvas.width);
+    // console.log(window.innerWidth - canvas.width);
+    // console.log(e.pageX + window.innerWidth - canvas.width - 1060);
+    if (window.innerWidth - canvas.width > 420) {
+      mouse.x = e.pageX - 170;
+    } else {
+
+      mouse.x = e.pageX - 5;
+    }
     mouse.y = e.pageY;
-    // console.log(mouse.x);
-    // console.log(mouse.y);
     if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
-      // debugger
       window.onmousedown = () => {
         window.localStorage["drag"] = "true";
-        // window.localStorage['putRulerBack'] = 'false';
-        // debugger
       }
     }
     if ((window.localStorage["drag"] === "true")) {
-      // window.localStorage["rulerInUse"] === "true";
-      // debugger
       keepPaintRuler()
     }
   };
@@ -74,25 +71,20 @@ window.addEventListener("DOMContentLoaded", () => {
   function keepPaintRuler(click = null) {
     c.clearRect(mouse.x, mouse.y, 70, 70);
     c.drawImage(background, 0, 0, 1000, 600);
-    // c.drawImage(ruler, rulerX, rulerY, 60, 60);
     c.drawImage(angryDino, dynoX, dynoY, canvas.height / 4, canvas.height / 4)
     c.drawImage(img2, kidX, kidY, canvas.height / 7, canvas.height / 7);
     c.drawImage(dadImage,
       startX, startY, dadImage.width / 1.4, 560,
       moveX, moveY, dadImage.width / 4, 130)
     c.drawImage(ruler, mouse.x - 40, mouse.y - 40, 70, 70);
-    // debugger
     if (posXclick !== 0) {
-      // c.drawImage(ruler, posXclick, posYclick, 70, 70);
       c.beginPath();
       c.moveTo(posXclick + 20,posYclick + 20);
-      // debugger
       c.lineTo(mouse.x,mouse.y);
       c.stroke();
       c.font = "30px Arial";
       var distTo = Math.floor(getDistance(mouse.x, mouse.y, posXclick, posYclick));
       c.fillText(`${distTo - 70}`, mouse.x + 10, mouse.y + 50);
-      // debugger
     }
 
   }
@@ -100,20 +92,15 @@ window.addEventListener("DOMContentLoaded", () => {
   window.onclick = () => {
     // debugger
     if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) > 120) && (posXclick !== 0)) {
-      // debugger
       posXclick = 0;
       keepPaintRuler();
     } else if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) > 120)) {
-      // debugger
       window.localStorage["rulerInUse"] = "true";
       posXclick = mouse.x - 40;
       posYclick = mouse.y - 40;
     } else if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) < 120) && (window.localStorage["rulerInUse"] === "true")) {
-      // debugger
       window.localStorage["drag"] = "false";
       window.localStorage["rulerInUse"] = 'false';
-      // debugger
-      // window.localStorage['putRulerBack'] = 'true';
     }
   };
 
@@ -318,32 +305,32 @@ window.addEventListener("DOMContentLoaded", () => {
                           moveX, moveY, dadImage.width / 4, 130)
     }
   }
-  window.addEventListener('keydown', (e) => {
-    console.log(moveX, moveY);
-    reachGoal();
-    reachDanger();
-    clearPrevDad();
-    switch (e.which) {
-      case 37:
-      moveX -= 30;
-      walkRightLeft();
-      break;
-      case 40:
-      moveY += 30;
-      walkUpDown();
-      break;
-      case 39:
-      moveX += 30;
-      walkRightLeft();
-      break;
-      case 38:
-      moveY -= 30;
-      walkUpDown();
-      break;
-      default:
-      c.drawImage(dadImage,
-        startX, startY, dadImage.width / 1.4, 560,
-        moveX, moveY, dadImage.width / 4, 130)
-      }
-    });
+  // window.addEventListener('keydown', (e) => {
+  //   // console.log(moveX, moveY);
+  //   reachGoal();
+  //   reachDanger();
+  //   clearPrevDad();
+  //   switch (e.which) {
+  //     case 37:
+  //     moveX -= 30;
+  //     walkRightLeft();
+  //     break;
+  //     case 40:
+  //     moveY += 30;
+  //     walkUpDown();
+  //     break;
+  //     case 39:
+  //     moveX += 30;
+  //     walkRightLeft();
+  //     break;
+  //     case 38:
+  //     moveY -= 30;
+  //     walkUpDown();
+  //     break;
+  //     default:
+  //     c.drawImage(dadImage,
+  //       startX, startY, dadImage.width / 1.4, 560,
+  //       moveX, moveY, dadImage.width / 4, 130)
+  //     }
+  //   });
 })
