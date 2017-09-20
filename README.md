@@ -7,8 +7,8 @@ The screen would be divided into two parts: left one for coding and right one fo
 
 This game will be consist of 10 levels. From easiest to hardest.
 
-Dad is main character of the game. He will be walking around the room and gathering kids toys to stop kid crying.
-User will navigate Dad by typing in easy commands(like turn left, walk 10 steps, turn around etc.)
+Dad is main character of the game. He will be walking around the room, trying to avoid obstacles and dad has to reach kid.
+User will navigate Dad by typing in easy commands(like turn left, walk 10 steps, turn around etc.). Also user can use a ruler to measure distance and press info button for help.
 
 ### Functionality & MVP
 
@@ -16,7 +16,7 @@ With this game User will be able to:
 
 - Start, reset round, ask for hint
 - Go to the previuos challenge
-- Get scores depending on performance
+- Check previous code
 
 
 ### Wireframes
@@ -24,7 +24,7 @@ With this game User will be able to:
 This app will consist of multiple pages. Since the screen will be divided into two parts, layout on the left side will be changing depending on the current level. And also it will be navlinks to github, Linkedin and modal about the project. On the right side of the screen will be input textarea for code, button to run code and button to reset.
 Architecture and technologies
 
-![wireframe](https://github.com/newcoderua/Walking-Dad/blob/master/images/wireframe.png?raw=true)
+![wireframe](https://github.com/newcoderua/Walking-Dad/blob/master/images/info-gif.gif?raw=true)
 
 ### Architecture and Technologies
 
@@ -35,6 +35,13 @@ Architecture and technologies
 - HTML AUDIO(maybe)
 - SVG
 
-### Implementation Timeline
 
-I am working on it
+### Future Implementations
+
+WalkingDad is a work in progress. It has been a great learning experience, but obviously a lot is left to do.
+
+The following features will be added in the near future:
+
+- Create more levels
+- Add more complicated commands
+- Implement animation not only for 1 character
