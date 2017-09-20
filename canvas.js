@@ -1,6 +1,7 @@
 
 window.addEventListener("DOMContentLoaded", () => {
-  // debugger
+  // console.log("HEY");
+
   var posXclick = 0;
   var posYclick = 0;
   window.localStorage['drag'] = "false";
@@ -14,7 +15,6 @@ window.addEventListener("DOMContentLoaded", () => {
   $('textarea').focus();
   var canvas = document.querySelector('canvas');
   var c = canvas.getContext('2d');
-
 
   canvas.width = 1000;
   canvas.height = 600;
@@ -42,20 +42,37 @@ window.addEventListener("DOMContentLoaded", () => {
   ruler.src = "https://s3.amazonaws.com/sportbnb-dev/ruler3.png";
   c.drawImage(ruler, rulerX, rulerY, 60, 60);
 
+  //dad
+  var dadImage = new Image();
+  dadImage.src = "https://s3.amazonaws.com/sportbnb-dev/spritesheet.png";
+  dadImage.width = 280;
+  dadImage.height = 60;
+  var delta = dadImage.width / 1.05;
+  var startX = 0;
+  var startY = 0;
+  var moveX = 120;
+  var moveY = 120;
+  c.drawImage(dadImage,
+                      startX, startY, dadImage.width / 1.4, 560,
+                      moveX, moveY, dadImage.width / 4, 130)
+  // debugger
   // check dragability
 
   var mouse = { x: 0, y: 0, down: false, setXPos: 0, setYPos: 0 }
   window.onmousemove = (e) => {
-    console.log(e.pageX);
-    console.log(window.innerWidth - canvas.width);
-    // console.log(canvas.width);
+    // console.log(e.pageX);
     // console.log(window.innerWidth - canvas.width);
-    // console.log(e.pageX + window.innerWidth - canvas.width - 1060);
+    clearPrevDad();
+      c.drawImage(dadImage,
+        startX, startY, dadImage.width / 1.4, 560,
+        moveX, moveY, dadImage.width / 4, 130);
+
+
     if (window.innerWidth - canvas.width > 420) {
-      mouse.x = e.pageX - 170;
+      mouse.x = e.pageX - 140;
     } else {
 
-      mouse.x = e.pageX - 5;
+      mouse.x = e.pageX;
     }
     mouse.y = e.pageY;
     if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
@@ -104,19 +121,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  //dad
-  var dadImage = new Image();
-  dadImage.src = "https://s3.amazonaws.com/sportbnb-dev/spritesheet.png";
-  dadImage.width = 280;
-  dadImage.height = 60;
-  var delta = dadImage.width / 1.05;
-  var startX = 0;
-  var startY = 0;
-  var moveX = 120;
-  var moveY = 120;
-  c.drawImage(dadImage,
-                      startX, startY, dadImage.width / 1.4, 560,
-                      moveX, moveY, dadImage.width / 4, 130)
+
 
   function walkRightLeft() {
     // debugger
@@ -333,4 +338,7 @@ window.addEventListener("DOMContentLoaded", () => {
   //       moveX, moveY, dadImage.width / 4, 130)
   //     }
   //   });
+
+
+
 })
