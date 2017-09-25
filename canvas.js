@@ -1,7 +1,5 @@
 
 window.addEventListener("DOMContentLoaded", () => {
-  // console.log("HEY");
-
   var posXclick = 0;
   var posYclick = 0;
   window.localStorage['drag'] = "false";
@@ -68,13 +66,21 @@ window.addEventListener("DOMContentLoaded", () => {
         moveX, moveY, dadImage.width / 4, 130);
 
 
-    if (window.innerWidth - canvas.width > 420) {
+    if (window.innerWidth - canvas.width > 620) {
       mouse.x = e.pageX - 140;
+    } else if (window.innerWidth - canvas.width > 520) {
+      // debugger
+      mouse.x = e.pageX - 90;
+    } else if (window.innerWidth - canvas.width > 320) {
+      mouse.x = e.pageX - 50;
+    } else if (window.innerWidth - canvas.width > 120) {
+      mouse.x = e.pageX - 20;
     } else {
-
       mouse.x = e.pageX;
     }
     mouse.y = e.pageY;
+
+    // debugger
     if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
       window.onmousedown = () => {
         window.localStorage["drag"] = "true";
@@ -107,15 +113,17 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   window.onclick = () => {
-    // debugger
     if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) > 120) && (posXclick !== 0)) {
+      // debugger
       posXclick = 0;
       keepPaintRuler();
     } else if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) > 120)) {
+      // debugger
       window.localStorage["rulerInUse"] = "true";
       posXclick = mouse.x - 40;
       posYclick = mouse.y - 40;
     } else if ((window.localStorage["drag"] === "true") && ((getDistance(mouse.x, mouse.y, rulerX, rulerY)) < 120) && (window.localStorage["rulerInUse"] === "true")) {
+      // debugger
       window.localStorage["drag"] = "false";
       window.localStorage["rulerInUse"] = 'false';
     }
@@ -338,7 +346,4 @@ window.addEventListener("DOMContentLoaded", () => {
   //       moveX, moveY, dadImage.width / 4, 130)
   //     }
   //   });
-
-
-
 })
