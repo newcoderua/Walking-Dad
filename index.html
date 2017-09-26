@@ -15,7 +15,9 @@
           alert('Next level not ready yet')
         }
         function openInfoGif() {
-          return $("#info-modal").addClass("is-active");
+          // debugger
+          $('a').removeClass('arrowDown');
+          $("#info-modal").addClass("is-active");
         }
         function dragstart_handler(ev) {
          console.log("dragStart");
@@ -29,6 +31,7 @@
       <section id="modal" class="modal">
         <article class="modal-content">
           <h1>Yeeeaaah, you completed first challenge!</h1>
+
 
           <p>
             <img id="yeah-image" src="https://bookcreator.com/wp-content/uploads/2016/10/yeah-600px.png"/>
@@ -84,6 +87,9 @@
       </div>
 
       <div id="right-user-column">
+        <div class="container">
+          <div><a href="#" class="arrowDown">Down</a></div>
+        </div>
         <div class='main-page-user-input-header'>
           <div>
             <img class="info-button" onclick="openInfoGif()" src="images/menu_info.png"/>

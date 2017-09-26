@@ -1,4 +1,3 @@
-
 window.addEventListener("DOMContentLoaded", () => {
   var posXclick = 0;
   var posYclick = 0;
@@ -134,8 +133,6 @@ window.addEventListener("DOMContentLoaded", () => {
       window.localStorage["rulerInUse"] = 'false';
     }
   };
-
-
 
   function walkRightLeft() {
     // debugger
@@ -324,32 +321,33 @@ window.addEventListener("DOMContentLoaded", () => {
                           moveX, moveY, dadImage.width / 4, 130)
     }
   }
-  // window.addEventListener('keydown', (e) => {
-  //   // console.log(moveX, moveY);
-  //   reachGoal();
-  //   reachDanger();
-  //   clearPrevDad();
-  //   switch (e.which) {
-  //     case 37:
-  //     moveX -= 30;
-  //     walkRightLeft();
-  //     break;
-  //     case 40:
-  //     moveY += 30;
-  //     walkUpDown();
-  //     break;
-  //     case 39:
-  //     moveX += 30;
-  //     walkRightLeft();
-  //     break;
-  //     case 38:
-  //     moveY -= 30;
-  //     walkUpDown();
-  //     break;
-  //     default:
-  //     c.drawImage(dadImage,
-  //       startX, startY, dadImage.width / 1.4, 560,
-  //       moveX, moveY, dadImage.width / 4, 130)
-  //     }
-  //   });
+  window.addEventListener('keydown', (e) => {
+    // console.log(moveX, moveY);
+    reachGoal();
+    reachDanger();
+    clearPrevDad();
+    switch (e.which) {
+      case 37:
+      moveX -= 30;
+      walkRightLeft();
+      break;
+      case 40:
+      moveY += 30;
+      walkUpDown();
+      break;
+      case 39:
+      moveX += 30;
+      walkRightLeft();
+      break;
+      case 38:
+      moveY -= 30;
+      walkUpDown();
+      break;
+      default:
+      c.drawImage(dadImage,
+        startX, startY, dadImage.width / 1.4, 560,
+        moveX, moveY, dadImage.width / 4, 130)
+      }
+    });
+
 })
