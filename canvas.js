@@ -81,12 +81,18 @@ window.addEventListener("DOMContentLoaded", () => {
     mouse.y = e.pageY;
 
     // debugger
+    window.check = (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60);
     if (getDistance(mouse.x, mouse.y, rulerX, rulerY) < 60) {
+      // debugger
       window.onmousedown = () => {
-        window.localStorage["drag"] = "true";
+        if (window.check) {
+          // debugger
+          window.localStorage["drag"] = "true";
+        }
       }
     }
     if ((window.localStorage["drag"] === "true")) {
+      // debugger
       keepPaintRuler()
     }
   };
