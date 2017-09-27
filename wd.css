@@ -71,9 +71,9 @@ label:focus,
 }
 
 #wrapped-keep-try-button {
-  width: 1200px;
+  /*width: 800px;*/
   text-align: right;
-  border-bottom: 1px solid grey;
+  border: 3px solid white;
   background-color: #c9e8cb;
   height: 80px;
 }

@@ -114,7 +114,6 @@ window.addEventListener("DOMContentLoaded", () => {
       var distTo = Math.floor(getDistance(mouse.x, mouse.y, posXclick, posYclick));
       c.fillText(`${distTo - 70}`, mouse.x + 10, mouse.y + 50);
     }
-
   }
 
   window.onclick = () => {
@@ -322,7 +321,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
   window.addEventListener('keydown', (e) => {
-    // console.log(moveX, moveY);
+    // console.log(e.which);
     reachGoal();
     reachDanger();
     clearPrevDad();
@@ -343,6 +342,7 @@ window.addEventListener("DOMContentLoaded", () => {
       moveY -= 30;
       walkUpDown();
       break;
+
       default:
       c.drawImage(dadImage,
         startX, startY, dadImage.width / 1.4, 560,
